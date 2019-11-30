@@ -21,7 +21,7 @@ body {
 .calendar__row {
   color: silver;
 }
-.calendar__row-cell {
+.calendar__row__cell {
   text-align: center;
 }
 
@@ -103,9 +103,11 @@ body {
   color: #fff;
 }
 
-.newhabit__title {
+.newhabit__bottom__control,
+.newhabit__bottom__control a {
   color: silver;
 }
+
 .newhabit__input,
 .newhabit__submit {
   line-height: 200%;
