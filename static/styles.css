@@ -1,111 +1,113 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300');
-
+@import url("https://fonts.googleapis.com/css?family=Roboto:300");
 
 body {
-	font-family: Roboto;
-	font-size: 1em;
+  font-family: Roboto;
+  font-size: 1em;
 }
 
 .grid7 {
-	display: grid;  
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
 .grid3 {
-	display: grid;  
-	grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
+.calendar {
+  margin: 1em;
+}
+.calendar__row {
+  color: silver;
+}
+.calendar__row-cell {
+  text-align: center;
+}
 
-.calendar { margin: 1em; }
-	.calendar__row {
-		color: silver;
-	}
-	.calendar__row-cell {
-		text-align: center;
-	}
-
-
-	
 .habit {
-	margin-bottom: 1em;
+  margin-bottom: 1em;
 }
-	.habit .calendar__row {
-		border:1px solid #f1f1f1;
-		border-radius: 0.2em;
-	}
+.habit .calendar__row {
+  border: 1px solid #f1f1f1;
+  border-radius: 0.2em;
+}
 
-		.habit .calendar__row__cell {
-			border-right:1px solid #f1f1f1;
-			text-align: center;
-			line-height: 200%;
-		}
-			.habit .calendar__row__cell:last-child {
-				border-right:0;
-			}
+.habit .calendar__row__cell {
+  border-right: 1px solid #f1f1f1;
+  text-align: center;
+  line-height: 200%;
+}
+.habit .calendar__row__cell:last-child {
+  border-right: 0;
+}
 
+.habit__title {
+  line-height: 200%;
+  margin-left: 0.5em;
+  margin: 0;
+  line-height: 200%;
+}
+.habit__rem {
+  cursor: pointer;
+  color: silver;
+}
+.habit-rem:hover {
+  color: maroon;
+}
 
-	.habit__title {
-		line-height: 200%;
-		margin-left: 0.5em;
-		margin: 0;
-		line-height: 200%;
-	}
-	.habit__rem {
-		cursor: pointer;
-		color: silver;
-	}
-		.habit-rem:hover {
-			color: maroon;
-		}
-	
-	.habit__controls {
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-		background: #f1f1f1;
-		padding: 1em 1em 2em 1em;
-		display: none;
-	}
-		.habit__controls__title {
-			text-align: center;
-			width: 100%;
-			display: block;
-			margin-bottom: 1em;
-			opacity: 0.54;
-		}
-		.habit__controls__button {
-			
-		}
+.habit__controls {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  background: #f1f1f1;
+  padding: 1em 1em 2em 1em;
+  display: none;
+}
+.habit__controls__title {
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-bottom: 1em;
+  opacity: 0.54;
+}
+.habit__controls__button {
+}
 
-		.habit__controls__button-yes, .habit__controls__button-no, .habit__controls__button-skip  {
-			background: goldenrod;
-			padding: 0.5em 1em;
-			margin: 0 0.5em;
-			display: inline-block;
-			text-align: center;
-			color: #fff;
-		}
-		.habit__controls__button-yes, .habit_yes {
-			background: green; 
-		}
-		.habit__controls__button-no, .habit_no {
-			background: rgb(245, 78, 78);
-		}
+.habit__controls__button-yes,
+.habit__controls__button-no,
+.habit__controls__button-skip {
+  background: goldenrod;
+  padding: 0.5em 1em;
+  margin: 0 0.5em;
+  display: inline-block;
+  text-align: center;
+  color: #fff;
+}
+.habit__controls__button-yes,
+.habit_yes {
+  background: green;
+}
+.habit__controls__button-no,
+.habit_no {
+  background: rgb(245, 78, 78);
+}
 
-		.habit__controls__button-skip, .habit_skip {
-			background: rgb(240, 240, 240);
-			color: silver;
-		}
+.habit__controls__button-skip,
+.habit_skip {
+  background: rgb(240, 240, 240);
+  color: silver;
+}
 
-		.habit_yes, .habit_no, .habit_skip {
-			color: #fff;
-			
-		}
+.habit_yes,
+.habit_no,
+.habit_skip {
+  color: #fff;
+}
 
 .newhabit__title {
-	color: silver;
-
+  color: silver;
 }
-.newhabit__input, .newhabit__submit {
-	line-height: 200%;
-	padding: 0.2em;
+.newhabit__input,
+.newhabit__submit {
+  line-height: 200%;
+  padding: 0.2em;
 }
