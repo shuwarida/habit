@@ -27,7 +27,12 @@ new Vue({
   },
   methods: {
     clearLocalStorageKey: function(key) {
-      if (confirm("Подтверждаете удаление всех " + (key == "habits" ? "привычек" : "оценок") + "?")) localStorage.removeItem(key);
+      if (confirm("Хотите удалить все " + (key == "habits" ? "привычки" : "оценки") + "?")) {
+        this.habits_val = {};
+        if (key == "habits") {
+          this.habits = {};
+        }
+      }
     },
 
     setCellClass: function(selHabit, selValue) {
@@ -43,6 +48,7 @@ new Vue({
 
     addHabit: function() {
       if (this.newHabit.length > 3) {
+        navigator.vibrate(50);
         const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
 
         this.habits = Object.assign({}, this.habits, { [id]: this.newHabit });
@@ -53,7 +59,7 @@ new Vue({
     },
 
     delHabit: function(selHabit) {
-      if (confirm('Подтверждаете удаление "' + this.habits[selHabit] + '"?')) {
+      if (confirm('Хотите удалить "' + this.habits[selHabit] + '"?')) {
         Vue.delete(this.habits, selHabit);
         Vue.delete(this.habits_val, selHabit);
       }
@@ -68,26 +74,23 @@ new Vue({
         } else {
           this.habits_val = Object.assign({}, this.habits_val, { [selHabit]: {} });
         }
-        console.log("--- new stage ---");
-        console.log(this.habits_val[selHabit][selValue]);
         switch (this.habits_val[selHabit][selValue]) {
           case "yes":
+            navigator.vibrate(50);
             this.habits_val[selHabit][selValue] = "no";
-            console.log("Стал: " + this.habits_val[selHabit][selValue]);
             break;
           case "no":
+            navigator.vibrate(50);
             this.habits_val[selHabit][selValue] = "skip";
-            console.log("Стал: " + this.habits_val[selHabit][selValue]);
             break;
           case "skip":
-            console.log("Был удален ");
+            navigator.vibrate(75);
             Vue.delete(this.habits_val[selHabit], selValue);
-            //            if (Object.keys(this.habits_val[selHabit]).length == 0) Vue.delete(this.habits_val, selHabit);
             break;
 
           default:
+            navigator.vibrate([50]);
             this.habits_val[selHabit][selValue] = "yes";
-            console.log("Стал: " + this.habits_val[selHabit][selValue]);
         }
       }
     }

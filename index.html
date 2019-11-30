@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="static/styles.css?v=1" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
   </head>
 
   <body>
@@ -17,7 +17,7 @@
       </div>
 
       <div v-for="(habit,index) in habits" class="habit">
-        <span class="habit__title" v-on:dblclick="delHabit(index)">{{ habit }}</span>
+        <span class="habit__title" v-on:click="delHabit(index)">{{ habit }}</span>
 
         <div class="calendar__row">
           <span v-for="(day,day_id) in days" :class="setCellClass(index,day_id)" @click="setHabitVal(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id">・</span>
@@ -31,6 +31,8 @@
         <div class="newhabit__bottom">
           <span @click="clearLocalStorageKey('habits_val')" class="newhabit__bottom_link">Очистить оценки?</span> ·
           <span @click="clearLocalStorageKey('habits')" class="newhabit__bottom_link">Удалить все привычки?</span>
+          <p></p>
+          <div><a href="/feedback.html">Обратная связь</a></div>
         </div>
       </div>
     </div>

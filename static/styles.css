@@ -1,11 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300");
 @import url("normalize.css");
 
+body {
+  padding: 1em;
+  font-family: Roboto;
+}
 .calendar {
   font-family: Roboto;
   margin: 0 auto;
-  max-width: 608px;
-  padding: 1em;
+  max-width: 100%;
 }
 .calendar__row {
   display: grid;
@@ -25,7 +28,6 @@
 }
 
 .habit .calendar__row__cell {
-  border-right: 1px solid #f1f1f1;
   line-height: 200%;
 }
 .habit .calendar__row__cell:last-child {
@@ -51,14 +53,16 @@
   color: silver;
 }
 
-.habit_yes,
-.habit_no,
-.habit_skip {
+.habit-yes,
+.habit-no,
+.habit-skip {
   color: #fff;
+  border: 0;
 }
 
 .newhabit__bottom {
   margin-top: 1em;
+  text-align: center;
 }
 .newhabit__bottom_link {
   color: silver;
@@ -71,5 +75,5 @@
   padding: 0.2em;
 }
 .newhabit__input {
-  width: 420px;
+  width: 200px;
 }
