@@ -16,7 +16,9 @@ body {
 }
 
 .calendar {
-  margin: 1em;
+  margin: 0 auto;
+  max-width: 608px;
+  padding: 1em;
 }
 .calendar__row {
   color: silver;
@@ -67,7 +69,7 @@ body {
   width: 100%;
   display: block;
   margin-bottom: 1em;
-  opacity: 0.54;
+  opacity: 0.87;
 }
 .habit__controls__button {
 }
@@ -101,6 +103,10 @@ body {
 .habit_no,
 .habit_skip {
   color: #fff;
+}
+
+.newhabit__bottom__control {
+  margin-top: 1em;
 }
 
 .newhabit__bottom__control,
