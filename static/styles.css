@@ -4,6 +4,7 @@
 body {
   padding: 1em;
   font-family: Roboto;
+  line-height: 150%;
 }
 .calendar {
   font-family: Roboto;
