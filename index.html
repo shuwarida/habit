@@ -2,53 +2,35 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>
-      Habits App
-    </title>
+    <title>Habits App</title>
     <script src="https://unpkg.com/vue"></script>
-    <script src="https://unpkg.com/babel-polyfill/dist/polyfill.min.js"></script>
 
-    <link rel="stylesheet" href="static/normalize.css" />
-    <link rel="stylesheet" href="static/main.css" />
     <link rel="stylesheet" href="static/styles.css" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-    <meta name="theme-color" content="#ff0000" />
   </head>
 
   <body>
-    <div id="app">
-      <div class="calendar">
-        <div class="calendar__row grid7">
-          <span v-for="day in days" class="calendar__row__cell">{{ day }}</span>
-        </div>
+    <div id="app" class="calendar">
+      <div class="calendar__row">
+        <span v-for="day in days" class="calendar__row__cell">{{ day }}</span>
+      </div>
 
-        <div v-for="(habit,index) in habits" class="habit">
-          <span class="habit__title">{{ habit }}</span>
-          <span v-on:click="remLocalStorage(index)" class="habit__rem">×</span>
+      <div v-for="(habit,index) in habits" class="habit">
+        <span class="habit__title" v-on:dblclick="delHabit(index)">{{ habit }}</span>
 
-          <div class="calendar__row grid7">
-            <span v-for="(day,day_id) in days" :class="setCellClass(index,day_id)" @click="clickHabit(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id">・</span>
-          </div>
-          <div class="habit__controls" v-bind:data-habit="index">
-            <span class="habit__controls__title">Вы справились с этой привычкой?</span>
-            <div class="grid3">
-              <span class="habit__controls__button-yes" @click="setHabitVal('yes')">Да</span>
-              <span class="habit__controls__button-no" @click="setHabitVal('no')">Нет</span>
-              <span class="habit__controls__button-skip" @click="setHabitVal('skip')">Пропустить</span>
-            </div>
-          </div>
+        <div class="calendar__row">
+          <span v-for="(day,day_id) in days" :class="setCellClass(index,day_id)" @click="setHabitVal(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id">・</span>
         </div>
-        <hr />
-        <div class="newhabit">
-          <p class="newhabit__title">Какую полезную привычку вы пытаетесь себе привить или избавиться от вредной?</p>
-          <input type="text" v-model="newHabit" @keydown.enter="addToLocalStorage(newHabit)" class="newhabit__input" />
-          <button @click="addToLocalStorage(newHabit)" class="newhabit__submit">Добавить</button>
-          <div class="newhabit__bottom__control">
-            <a href="javascrip:void();" @click="clearHabitsVal()">Очистить оценки?</a> ·
-            <a href="javascrip:void();" @click="clearHabits()">Удалить все привычки?</a>
-          </div>
+      </div>
+
+      <div class="newhabit">
+        <input type="text" v-model="newHabit" @keydown.enter="addHabit(newHabit)" class="newhabit__input" placeholder="Добавить привычку" />
+        <button @click="addHabit()" class="newhabit__submit">Добавить</button>
+
+        <div class="newhabit__bottom">
+          <span @click="clearLocalStorageKey('habits_val')" class="newhabit__bottom_link">Очистить оценки?</span> ·
+          <span @click="clearLocalStorageKey('habits')" class="newhabit__bottom_link">Удалить все привычки?</span>
         </div>
       </div>
     </div>
