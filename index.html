@@ -55,8 +55,15 @@
       </div>
 
       <div class="newhabit">
-        <input type="text" v-model="newHabit" @keydown.enter="addHabit(newHabit)" class="newhabit__input" placeholder="Добавить привычку" />
-        <button @click="addHabit()" class="newhabit__submit">Добавить</button>
+        <div style="  display: grid; grid-template-columns: 3fr 1fr">
+          <div>
+            <input type="text" v-model="newHabit" @keydown.enter="addHabit(newHabit)" class="newhabit__input" placeholder="Добавить привычку" />
+          </div>
+          <div>
+            <button @click="addHabit()" class="newhabit__submit">Добавить</button>
+          </div>
+        </div>
+      </div>
         <div class="newhabit__bottom">
           <span @click="clearLocalStorageKey('habits_val')" class="newhabit__bottom_link">Очистить оценки?</span> ·
           <span @click="clearLocalStorageKey('habits')" class="newhabit__bottom_link">Удалить все привычки?</span>
