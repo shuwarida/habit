@@ -24,52 +24,50 @@
 
   <body>
     <div id="app" class="calendar">
-      <div class="calendar__row">
-        <span v-for="day in days" class="calendar__row__cell">{{ day }}</span>
-      </div>
-
       <div v-if="Object.keys(habits).length === 0">
-        <h3>Формируйте и прививайте к себе правильные привычки.Составтье список положительных и отрицательных привычек.</h3>
+        <h3>Формируйте и прививайте у себя правильные привычки. Составтье список положительных и отрицательных привычек, чтобы контролировать их.</h3>
 
         <ul>
-          <li>
-            Уделяйте только1 минуту в день, на оценку чтобы определить и отслеживать изменения в цветовой схеме.
-          </li>
-          <li>Не расстраивайтесь и унывайте если не получается справляться сразу со всеми привычками. Главное улучшайтесь в них каждый день!</li>
+          <li>Уделяйте только минуту в день, чтобы определять и отслеживать изменения в цветовой схеме!</li>
+          <li>Не расстраивайтесь если не получается справляться сразу со всеми привычками!</li>
           <li>Сравнивайте себя неделя к неделе и почувствуйте изменения!</li>
         </ul>
-
+        <hr />
+        <div class="calendar__row">
+          <span v-for="day in days" class="calendar__row__cell">{{ day }}</span>
+        </div>
+        <div class="habit">
+          <span class="habit__title">Просыпаться в 6:30</span>
+          <div class="calendar__row">
+            <span v-for="d in 7" :class="setCellClass(1,d)"></span>
+          </div>
+        </div>
+        <hr />
         <p>
-          <span class="habit-yes">Зеленый</span> - Справились. <span class="habit-no">Красный</span> - Не справились. <span class="habit-skip" style="color: gray">Голубой</span> - Пропустить (на пример - пропустили обед,
-          поэтому не можете его оценить был он полезным или нет).
+          <span class="habit-yes">[Зеленый]</span> - Справились. <span class="habit-no">[Красный]</span> - Не справились. <span class="habit-skip" style="color: gray">[Серый]</span> - Пропустить (решили что выходных этот
+          режим не касается).
         </p>
-        <p>По мере того как будете следить за привычками, сможете с легкостью определять положительные или отрицательные тенденции в образе своей жизни.</p>
+        <p>По мере того, как будете следить за привычками, с легкостью сможете определять положительные или отрицательные тенденции в своем образе жизни.</p>
         <p>Примите меры, чтобы через маленькие изменения «быть лучшей версией себя»!</p>
+      </div>
+      <div v-else class="calendar__row">
+        <span v-for="day in days" class="calendar__row__cell">{{ day }}</span>
       </div>
 
       <div v-for="(habit,index) in habits" class="habit">
         <span class="habit__title" v-on:click="delHabit(index)">{{ habit }}</span>
         <div class="calendar__row">
-          <span v-for="(day,day_id) in days" :class="setCellClass(index,day_id)" @click="setHabitVal(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id">・</span>
+          <span v-for="(day,day_id) in days" :class="setCellClass(index,day_id)" @click="setHabitVal(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id"></span>
         </div>
       </div>
 
       <div class="newhabit">
-        <div style="  display: grid; grid-template-columns: 3fr 1fr">
-          <div>
-            <input type="text" v-model="newHabit" @keydown.enter="addHabit(newHabit)" class="newhabit__input" placeholder="Добавить привычку" />
-          </div>
-          <div>
-            <button @click="addHabit()" class="newhabit__submit">Добавить</button>
-          </div>
-        </div>
+        <input type="text" v-model="newHabit" @keydown.enter="addHabit(newHabit)" class="newhabit__input" placeholder="Добавить привычку" />
+        <button @click="addHabit()" class="newhabit__submit">Добавить</button>
       </div>
-        <div class="newhabit__bottom">
-          <span @click="clearLocalStorageKey('habits_val')" class="newhabit__bottom_link">Очистить оценки</span> ·
-          <span @click="clearLocalStorageKey('habits')" class="newhabit__bottom_link">Удалить все привычки</span>
-          <p></p>
-          <div><a href="feedback.html">Обратная связь</a></div>
-        </div>
+      <div class="footer">
+        <span @click="clearLocalStorageKey('habits_val')" class="footer_link">Очистить оценки</span> · <span @click="clearLocalStorageKey('habits')" class="footer_link">Удалить все привычки</span> ·
+        <a href="feedback.html" class="footer_link">Обратная связь</a>
       </div>
     </div>
 

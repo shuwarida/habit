@@ -2,9 +2,10 @@
 @import url("normalize.css");
 
 body {
-  padding: 1em;
+  padding: 0.5em 1em;
   font-family: Roboto;
   line-height: 150%;
+  color: #263238;
 }
 .calendar {
   font-family: Roboto;
@@ -15,57 +16,71 @@ body {
 .calendar__row {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  color: silver;
 }
 .calendar__row__cell {
-  text-align: center;
   cursor: pointer;
+  text-align: center;
+  color: #b0bec5;
 }
 .calendar__row__cell:hover {
-  box-shadow: inset 0px 0px 0px 1px #dbdbdb;
-  opacity: 0.75;
+  opacity: 0.85;
+}
+
+.newhabit {
+  margin-top: 1em;
+  display: grid;
+  grid-template-columns: 5fr 2fr;
 }
 
 .habit {
-  margin-bottom: 1em;
+  margin-bottom: 0.5em;
 }
+
 .habit .calendar__row {
-  border: 1px solid #f1f1f1;
+  border: 1px solid #eceff1;
   border-radius: 0.2em;
 }
 
 .habit .calendar__row__cell {
+  background: #fafafa;
   line-height: 200%;
+  height: 2em;
+  border-right: 1px solid #eceff1;
 }
+.habit .calendar__row__cell:first-child {
+  border-top-left-radius: 0.2em;
+  border-bottom-left-radius: 0.2em;
+}
+
 .habit .calendar__row__cell:last-child {
+  border-top-right-radius: 0.2em;
+  border-bottom-right-radius: 0.2em;
   border-right: 0;
 }
 
 .habit__title {
-  line-height: 200%;
   margin-left: 0.5em;
   margin: 0;
-  line-height: 200%;
   user-select: none;
 }
 
-.habit-yes {
+.calendar__row__cell.habit-yes {
   background: #66bb6a;
   color: #fff;
 }
-.habit-no {
-  background: #ef5350;
+.calendar__row__cell.habit-no {
+  background: #ff7043;
   color: #fff;
 }
-.habit-skip {
-  background: #f1f1f1;
+.calendar__row__cell.habit-skip {
+  background: #e0e0e0;
 }
 
-.newhabit__bottom {
+.footer {
   margin-top: 1em;
   text-align: center;
 }
-.newhabit__bottom_link {
+.footer_link {
   color: silver;
   cursor: pointer;
 }
@@ -73,11 +88,22 @@ body {
 .newhabit__input,
 .newhabit__submit {
   line-height: 200%;
-  padding: 0.2em;
+  padding: 0.2em 0.4em;
 }
 .newhabit__input {
+  box-sizing: border-box;
   width: 100%;
+  border: 1px solid #eceff1;
+  border-top-left-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
 }
 .newhabit__submit {
+  background: #eceff1;
   width: 100%;
+  border: 1px solid #eceff1;
+  border-left: 0;
+  border-top-right-radius: 0.3em;
+  border-bottom-right-radius: 0.3em;
+  cursor: pointer;
+  color: #263238;
 }

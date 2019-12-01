@@ -9,7 +9,7 @@ new Vue({
   },
   mounted() {
     this.habits = JSON.parse(localStorage.getItem("habits")) || {};
-    this.habits_val = JSON.parse(localStorage.getItem("habits_val")) || {};
+    this.habits_val = JSON.parse(localStorage.getItem("habits_val")) || { "1": { "0": "yes", "1": "no", "2": "yes", "3": "no", "4": "no" } };
   },
   watch: {
     habits: {
@@ -50,12 +50,15 @@ new Vue({
         this.habits = Object.assign({}, this.habits, { [id]: this.newHabit });
         this.habits_val = Object.assign({}, this.habits_val, { [id]: {} });
 
+        gtag("event", "addHabit", { event_category: "habit", event_label: this.newHabit });
         this.newHabit = "";
       }
     },
 
     delHabit: function(selHabit) {
       if (confirm('Хотите удалить "' + this.habits[selHabit] + '"?')) {
+        gtag("event", "delHabit", { event_category: "habit", event_label: this.habits[selHabit] });
+
         Vue.delete(this.habits, selHabit);
         Vue.delete(this.habits_val, selHabit);
       }
@@ -85,6 +88,9 @@ new Vue({
           default:
             this.habits_val[selHabit][selValue] = "yes";
         }
+
+        gtag("event", "setHabitVal", { event_category: "habit", event_label: this.habits[selHabit] });
+
         navigator.vibrate([vibrato]);
       }
     }
