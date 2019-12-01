@@ -21,6 +21,10 @@ body {
   text-align: center;
   cursor: pointer;
 }
+.calendar__row__cell:hover {
+  box-shadow: inset 0px 0px 0px 1px #dbdbdb;
+  opacity: 0.75;
+}
 
 .habit {
   margin-bottom: 1em;
@@ -46,21 +50,15 @@ body {
 }
 
 .habit-yes {
-  background: green;
+  background: #66bb6a;
+  color: #fff;
 }
 .habit-no {
-  background: rgb(245, 78, 78);
-}
-.habit-skip {
-  background: rgb(240, 240, 240);
-  color: silver;
-}
-
-.habit-yes,
-.habit-no,
-.habit-skip {
+  background: #ef5350;
   color: #fff;
-  border: 0;
+}
+.habit-skip {
+  background: #f1f1f1;
 }
 
 .newhabit__bottom {
