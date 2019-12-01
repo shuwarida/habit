@@ -36,8 +36,7 @@ new Vue({
     setCellClass: function(selHabit, selValue) {
       var cssclass = "calendar__row__cell";
 
-      if (typeof this.habits_val[selHabit] === "object")
-        if (typeof this.habits_val[selHabit][selValue] === "string") cssclass += " habit-" + this.habits_val[selHabit][selValue];
+      if (typeof this.habits_val[selHabit] === "object") if (typeof this.habits_val[selHabit][selValue] === "string") cssclass += " habit-" + this.habits_val[selHabit][selValue];
 
       return cssclass;
     },
@@ -69,7 +68,7 @@ new Vue({
           }
         } else this.habits_val = Object.assign({}, this.habits_val, { [selHabit]: {} });
 
-        var vibrato = 50
+        var vibrato = 50;
         switch (this.habits_val[selHabit][selValue]) {
           case "yes":
             this.habits_val[selHabit][selValue] = "no";
@@ -78,7 +77,7 @@ new Vue({
             this.habits_val[selHabit][selValue] = "skip";
             break;
           case "skip":
-            vibrato = 75
+            vibrato = 75;
             Vue.delete(this.habits_val[selHabit], selValue);
             break;
 
@@ -89,4 +88,4 @@ new Vue({
       }
     }
   }
-}
+});
