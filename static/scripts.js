@@ -35,9 +35,10 @@ new Vue({
 
     setCellClass: function(selHabit, selValue) {
       var cssclass = "calendar__row__cell";
-
-      if (typeof this.habits_val[selHabit] === "object") if (typeof this.habits_val[selHabit][selValue] === "string") cssclass += " habit-" + this.habits_val[selHabit][selValue];
-
+      if (typeof this.habits_val[selHabit] === "object")
+        if (typeof this.habits_val[selHabit][selValue] === "string") {
+          cssclass += " habit-" + this.habits_val[selHabit][selValue];
+        }
       return cssclass;
     },
 

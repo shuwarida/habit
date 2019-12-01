@@ -19,6 +19,7 @@ body {
 }
 .calendar__row__cell {
   text-align: center;
+  cursor: pointer;
 }
 
 .habit {
