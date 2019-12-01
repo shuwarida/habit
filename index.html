@@ -24,7 +24,6 @@
             Уделяйте только1 минуту в день, на оценку чтобы определить и отслеживать изменения в цветовой схеме.
           </li>
           <li>Не расстраивайтесь и унывайте если не получается справляться сразу со всеми привычками. Главное улучшайтесь в них каждый день!</li>
-
           <li>Сравнивайте себя неделя к неделе и почувствуйте изменения!</li>
         </ul>
 
@@ -32,15 +31,12 @@
           <span class="habit-yes">Зеленый</span> - Справились. <span class="habit-no">Красный</span> - Не справились. <span class="habit-skip" style="color: gray">Зеленый</span> - Пропустить (на пример - пропустили обед,
           поэтому не можете его оценить был он полезным или нет).
         </p>
-
         <p>По мере того как будете следить за привычками, сможете с легкостью определять положительные или отрицательные тенденции в образе своей жизни.</p>
-
         <p>Примите меры, чтобы через маленькие изменения «быть лучшей версией себя»!</p>
       </div>
 
       <div v-for="(habit,index) in habits" class="habit">
         <span class="habit__title" v-on:click="delHabit(index)">{{ habit }}</span>
-
         <div class="calendar__row">
           <span v-for="(day,day_id) in days" :class="setCellClass(index,day_id)" @click="setHabitVal(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id">・</span>
         </div>
@@ -49,7 +45,6 @@
       <div class="newhabit">
         <input type="text" v-model="newHabit" @keydown.enter="addHabit(newHabit)" class="newhabit__input" placeholder="Добавить привычку" />
         <button @click="addHabit()" class="newhabit__submit">Добавить</button>
-
         <div class="newhabit__bottom">
           <span @click="clearLocalStorageKey('habits_val')" class="newhabit__bottom_link">Очистить оценки?</span> ·
           <span @click="clearLocalStorageKey('habits')" class="newhabit__bottom_link">Удалить все привычки?</span>
