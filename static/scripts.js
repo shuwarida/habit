@@ -69,25 +69,24 @@ new Vue({
           }
         } else this.habits_val = Object.assign({}, this.habits_val, { [selHabit]: {} });
 
+        var vibrato = 50
         switch (this.habits_val[selHabit][selValue]) {
           case "yes":
-            navigator.vibrate(50);
             this.habits_val[selHabit][selValue] = "no";
             break;
           case "no":
-            navigator.vibrate(50);
             this.habits_val[selHabit][selValue] = "skip";
             break;
           case "skip":
-            navigator.vibrate(75);
+            vibrato = 75
             Vue.delete(this.habits_val[selHabit], selValue);
             break;
 
           default:
-            navigator.vibrate([50]);
             this.habits_val[selHabit][selValue] = "yes";
         }
+        navigator.vibrate([vibrato]);
       }
     }
   }
-});
+}
