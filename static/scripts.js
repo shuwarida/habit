@@ -29,9 +29,7 @@ new Vue({
     clearLocalStorageKey: function(key) {
       if (confirm("Хотите удалить все " + (key == "habits" ? "привычки" : "оценки") + "?")) {
         this.habits_val = {};
-        if (key == "habits") {
-          this.habits = {};
-        }
+        if (key == "habits") this.habits = {};
       }
     },
 
@@ -39,9 +37,7 @@ new Vue({
       var cssclass = "calendar__row__cell";
 
       if (typeof this.habits_val[selHabit] === "object")
-        if (typeof this.habits_val[selHabit][selValue] === "string") {
-          cssclass += " habit-" + this.habits_val[selHabit][selValue];
-        }
+        if (typeof this.habits_val[selHabit][selValue] === "string") cssclass += " habit-" + this.habits_val[selHabit][selValue];
 
       return cssclass;
     },
@@ -71,9 +67,8 @@ new Vue({
           if (typeof this.habits_val[selHabit][selValue] !== "string") {
             this.habits_val[selHabit] = Object.assign({}, this.habits_val[selHabit], { [selValue]: {} });
           }
-        } else {
-          this.habits_val = Object.assign({}, this.habits_val, { [selHabit]: {} });
-        }
+        } else this.habits_val = Object.assign({}, this.habits_val, { [selHabit]: {} });
+
         switch (this.habits_val[selHabit][selValue]) {
           case "yes":
             navigator.vibrate(50);
