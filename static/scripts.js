@@ -8,9 +8,10 @@ new Vue({
     newHabit: ""
   },
   mounted() {
-    this.habits = JSON.parse(localStorage.getItem("habits")) || {};
-    this.habits_val = JSON.parse(localStorage.getItem("habits_val")) || { "1": { "0": "yes", "1": "no", "2": "yes", "3": "no", "4": "no" } };
+    this.habits = localStorage.getItem("habits").length > 0 ? JSON.parse(localStorage.getItem("habits")) : {};
+    this.habits_val = JSON.parse(localStorage.getItem("habits_val")) || { 1: { 1: "yes", 2: "no", 3: "yes", 4: "yes" } };
   },
+
   watch: {
     habits: {
       handler: function(data) {
@@ -26,19 +27,19 @@ new Vue({
     }
   },
   methods: {
-    clearLocalStorageKey: function(key) {
-      if (confirm("Хотите удалить все " + (key == "habits" ? "привычки" : "оценки") + "?")) {
-        this.habits_val = {};
-        if (key == "habits") this.habits = {};
-      }
-    },
-
-    setCellClass: function(selHabit, selValue) {
+    getHabitsVal: function(selHabit, selValue) {
       var cssclass = "calendar__row__cell";
-      if (typeof this.habits_val[selHabit] === "object")
-        if (typeof this.habits_val[selHabit][selValue] === "string") {
-          cssclass += " habit-" + this.habits_val[selHabit][selValue];
-        }
+      if (typeof this.habits_val[selHabit] === "object" && typeof this.habits_val[selHabit][selValue] === "string") {
+        cssclass += " habit-" + this.habits_val[selHabit][selValue];
+      }
+      return cssclass;
+    },
+    getHabitsVal_demo: function(selHabit, selValue) {
+      var habits_val = { 1: { 1: "yes", 2: "no", 3: "yes", 4: "yes" } };
+      var cssclass = "calendar__row__cell";
+      if (typeof habits_val[selHabit] === "object" && typeof habits_val[selHabit][selValue] === "string") {
+        cssclass += " habit-" + habits_val[selHabit][selValue];
+      }
       return cssclass;
     },
 
@@ -48,11 +49,31 @@ new Vue({
         const id = `f${(~~(Math.random() * 1e8)).toString(16)}`;
 
         this.habits = Object.assign({}, this.habits, { [id]: this.newHabit });
-        this.habits_val = Object.assign({}, this.habits_val, { [id]: {} });
 
         gtag("event", "addHabit", { event_category: "habit", event_label: this.newHabit });
         this.newHabit = "";
       }
+    },
+
+    setHabitVal: function(selHabit, selValue) {
+      if (typeof this.habits_val[selHabit] !== "object") {
+        this.habits_val = Object.assign({}, this.habits_val, { [selHabit]: { [selValue]: " " } });
+      }
+      if (typeof this.habits_val[selHabit][selValue] !== "string") {
+        this.habits_val[selHabit] = Object.assign({}, this.habits_val[selHabit], { [selValue]: " " });
+      }
+
+      if (this.habits_val[selHabit][selValue] !== "skip") {
+        var vibrato = 50;
+        this.habits_val[selHabit][selValue] = { " ": "yes", yes: "no", no: "skip" }[this.habits_val[selHabit][selValue]];
+      } else {
+        vibrato = 75;
+        Vue.delete(this.habits_val[selHabit], selValue);
+        if (Object.keys(this.habits_val[selHabit]).length === 0) Vue.delete(this.habits_val, selHabit);
+      }
+
+      navigator.vibrate([vibrato]);
+      gtag("event", "setHabitVal", { event_category: "habit", event_label: this.habits[selHabit] });
     },
 
     delHabit: function(selHabit) {
@@ -64,34 +85,15 @@ new Vue({
       }
     },
 
-    setHabitVal: function(selHabit, selValue) {
-      if (typeof this.habits_val === "object") {
-        if (typeof this.habits_val[selHabit] === "object") {
-          if (typeof this.habits_val[selHabit][selValue] !== "string") {
-            this.habits_val[selHabit] = Object.assign({}, this.habits_val[selHabit], { [selValue]: {} });
-          }
-        } else this.habits_val = Object.assign({}, this.habits_val, { [selHabit]: {} });
+    delHabitsAll: function() {
+      if (confirm("Хотите удалить все привычки?")) {
+        this.habits = {};
+      }
+    },
 
-        var vibrato = 50;
-        switch (this.habits_val[selHabit][selValue]) {
-          case "yes":
-            this.habits_val[selHabit][selValue] = "no";
-            break;
-          case "no":
-            this.habits_val[selHabit][selValue] = "skip";
-            break;
-          case "skip":
-            vibrato = 75;
-            Vue.delete(this.habits_val[selHabit], selValue);
-            break;
-
-          default:
-            this.habits_val[selHabit][selValue] = "yes";
-        }
-
-        gtag("event", "setHabitVal", { event_category: "habit", event_label: this.habits[selHabit] });
-
-        navigator.vibrate([vibrato]);
+    delHabitsValAll: function() {
+      if (confirm("Хотите удалить все оценки?")) {
+        this.habits_val = {};
       }
     }
   }

@@ -5,7 +5,7 @@
     <title>Habits App</title>
     <script src="https://unpkg.com/vue"></script>
 
-    <link rel="stylesheet" href="static/styles.css?v=1" />
+    <link rel="stylesheet" href="static/styles.css" />
 
     <meta name="viewport" content="width=device-width, user-scalable=no" />
 
@@ -28,21 +28,23 @@
         <h3>Формируйте и прививайте у себя правильные привычки. Составтье список положительных и отрицательных привычек, чтобы контролировать их.</h3>
 
         <ul>
-          <li>Уделяйте только минуту в день, чтобы определять и отслеживать изменения в цветовой схеме!</li>
+          <li>Уделяйте только 1 минуту в день, чтобы определять и отслеживать изменения в цветовой схеме!</li>
           <li>Не расстраивайтесь если не получается справляться сразу со всеми привычками!</li>
           <li>Сравнивайте себя неделя к неделе и почувствуйте изменения!</li>
         </ul>
+
         <hr />
-        <div class="calendar__row">
-          <span v-for="day in days" class="calendar__row__cell">{{ day }}</span>
-        </div>
+
+        <div class="calendar__row"><span v-for="day in days" class="calendar__row__cell">{{ day }}</span></div>
         <div class="habit">
           <span class="habit__title">Просыпаться в 6:30</span>
           <div class="calendar__row">
-            <span v-for="d in 7" :class="setCellClass(1,d)"></span>
+            <span v-for="d in 7" :class="getHabitsVal_demo(1,d)"></span>
           </div>
         </div>
+
         <hr />
+
         <p>
           <span class="habit-yes">[Зеленый]</span> - Справились. <span class="habit-no">[Красный]</span> - Не справились. <span class="habit-skip" style="color: gray">[Серый]</span> - Пропустить (решили что выходных этот
           режим не касается).
@@ -57,7 +59,7 @@
       <div v-for="(habit,index) in habits" class="habit">
         <span class="habit__title" v-on:click="delHabit(index)">{{ habit }}</span>
         <div class="calendar__row">
-          <span v-for="(day,day_id) in days" :class="setCellClass(index,day_id)" @click="setHabitVal(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id"></span>
+          <span v-for="(day,day_id) in days" :class="getHabitsVal(index,day_id)" @click="setHabitVal(index,day_id)" v-bind:data-habit="index" v-bind:data-day="day_id"></span>
         </div>
       </div>
 
@@ -66,11 +68,11 @@
         <button @click="addHabit()" class="newhabit__submit">Добавить</button>
       </div>
       <div class="footer">
-        <span @click="clearLocalStorageKey('habits_val')" class="footer_link">Очистить оценки</span> · <span @click="clearLocalStorageKey('habits')" class="footer_link">Удалить все привычки</span> ·
+        <span @click="delHabitsValAll()" class="footer_link">Очистить оценки</span> · <span @click="delHabitsAll()" class="footer_link">Удалить все привычки</span> ·
         <a href="feedback.html" class="footer_link">Обратная связь</a>
       </div>
     </div>
 
-    <script src="static/scripts.js?v=1"></script>
+    <script src="static/scripts.js"></script>
   </body>
 </html>
