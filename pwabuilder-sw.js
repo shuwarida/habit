@@ -6,7 +6,7 @@ const precacheFiles = [
 ];
 
 // TODO: replace the following with the correct offline fallback page i.e.: const offlineFallbackPage = "offline.html";
-const offlineFallbackPage = "index.html";
+const offlineFallbackPage = "https://islamov.github.io/habit/index.html";
 
 const networkFirstPaths = [
   /* Add an array of regex of paths that should go network first */
@@ -46,7 +46,7 @@ self.addEventListener("install", function(event) {
       console.log("[PWA Builder] Caching pages during install");
 
       return cache.addAll(precacheFiles).then(function() {
-        if (offlineFallbackPage === "index.html") {
+        if (offlineFallbackPage === "https://islamov.github.io/habit/index.html") {
           return cache.add(new Response("TODO: Update the value of the offlineFallbackPage constant in the serviceworker."));
         }
 
